@@ -54,23 +54,45 @@ class BdEnMemoria implements PersonaDao {
             
             String s = "insert into Personas values(?,?)";
             PreparedStatement ps = connectDB.prepareStatement(s);
-            ps.setInt(1,1);
-            ps.setString(2,"Catalin");
-            ps.executeUpdate();
             
-            ps.setInt(1,2);
-            ps.setString(2,"Catalin2");
-            ps.executeUpdate();
+            connectDB.setAutoCommit (false);
+            for (int i = 0; i < 5; i++) {
+                ps.setLong(1, 1+System.nanoTime());
+                ps.setString(2, "Catalin"+System.nanoTime());
+                ps.addBatch();
+            }
+            int[] filas = ps.executeBatch();
+            connectDB.commit();
+            for (int i = 0; i < filas.length; i++) {
+                System.out.println("Filas afectadas: " + filas[i]);
+            }
+//            ps.setInt(1,1);
+//            ps.setString(2,"Catalin");
+//            ps.executeUpdate();
+//            
+//            ps.setInt(1,2);
+//            ps.setString(2,"Catalin2");
+//            ps.executeUpdate();
+//            
+//            ps.setInt(1,3);
+//            ps.setString(2,"Catalin3");
+//            ps.executeUpdate();
+//            
+//            ps.setInt(1,3);
+//            ps.setString(2,"Catalin4");
+//            ps.executeUpdate();
             
-            ps.setInt(1,3);
-            ps.setString(2,"Catalin3");
-            ps.executeUpdate();
             
 //            ps.setLong(1,id);
 //            ps.setString(2,nombre);
 //            ps.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException ex ) {
             Logger.getLogger(BdEnMemoria.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connectDB.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(BdEnMemoria.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
         return p;
     }
@@ -84,6 +106,9 @@ class BdEnMemoria implements PersonaDao {
         try {
             stmt = connectDB.createStatement();
             rset = stmt.executeQuery("select * from Personas");
+            //String s = "select * from Personas";
+            //PreparedStatement ps = connectDB.prepareStatement(s);
+            //ps.executeQuery();
             
             while (rset.next()) {
                 pers.add(new Persona(rset.getLong(1), rset.getString(2)));
