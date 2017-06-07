@@ -7,6 +7,7 @@ package com.mycompany.ejemplodao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,6 +25,7 @@ class BdEnMemoria implements PersonaDao {
     private final List<Persona> personas;
     private Connection connectDB;
     Statement stmt = null;
+    PreparedStatement preparedStatement = null;
 
     //constructor
     BdEnMemoria() {
@@ -51,6 +53,7 @@ class BdEnMemoria implements PersonaDao {
 //          String formateada = String.format(orden, id,nombre);
 //          stmt.executeUpdate(formateada);
             stmt.executeUpdate("insert into Personas values(" + id + "," + "'" + nombre + "'" + ")");
+            preparedStatement = connectDB.prepareStatement(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(BdEnMemoria.class.getName()).log(Level.SEVERE, null, ex);
         }
