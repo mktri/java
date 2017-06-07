@@ -15,8 +15,9 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Persona p = new Persona(99L,"CATALIN");
-        PersonaDao servicio = FactoriaPersonaDao.get();        
+        
+        PersonaDao servicio = FactoriaPersonaDao.get();
+        Persona p = new Persona(90L,"CTALIN");
         servicio.nueva(p);
     }
 

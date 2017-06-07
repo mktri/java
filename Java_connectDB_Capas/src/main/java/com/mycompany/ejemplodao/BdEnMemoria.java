@@ -24,8 +24,7 @@ class BdEnMemoria implements PersonaDao {
 
     private final List<Persona> personas;
     private Connection connectDB;
-    Statement stmt = null;
-    PreparedStatement preparedStatement = null;
+    Statement stmt = null;    
 
     //constructor
     BdEnMemoria() {
@@ -52,8 +51,24 @@ class BdEnMemoria implements PersonaDao {
 //          final String orden = "insert into personas values (%d,'%s')";
 //          String formateada = String.format(orden, id,nombre);
 //          stmt.executeUpdate(formateada);
-            stmt.executeUpdate("insert into Personas values(" + id + "," + "'" + nombre + "'" + ")");
-            preparedStatement = connectDB.prepareStatement(stmt);
+            
+            String s = "insert into Personas values(?,?)";
+            PreparedStatement ps = connectDB.prepareStatement(s);
+            ps.setInt(1,1);
+            ps.setString(2,"Catalin");
+            ps.executeUpdate();
+            
+            ps.setInt(1,2);
+            ps.setString(2,"Catalin2");
+            ps.executeUpdate();
+            
+            ps.setInt(1,3);
+            ps.setString(2,"Catalin3");
+            ps.executeUpdate();
+            
+//            ps.setLong(1,id);
+//            ps.setString(2,nombre);
+//            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BdEnMemoria.class.getName()).log(Level.SEVERE, null, ex);
         }
