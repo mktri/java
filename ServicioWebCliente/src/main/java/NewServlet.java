@@ -25,6 +25,7 @@ public class NewServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/ServicioWeb/ServicioPersona.wsdl")
     private ServicioPersona_Service service;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
