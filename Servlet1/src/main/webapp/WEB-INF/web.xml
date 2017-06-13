@@ -4,13 +4,33 @@
         <servlet-name>Servlet1</servlet-name>
         <servlet-class>com.mycompany.servlet1.Servlet1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Redireccion</servlet-name>
+        <servlet-class>com.mycompany.servlet1.Redireccion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>com.mycompany.servlet1.ErrorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet1</servlet-name>
         <url-pattern>/Servlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Redireccion</servlet-name>
+        <url-pattern>/Redireccion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/ErrorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <error-page>
+        <exception-type>404</exception-type>
+        <location>/ErrorServlet</location>
+    </error-page>
 </web-app>
