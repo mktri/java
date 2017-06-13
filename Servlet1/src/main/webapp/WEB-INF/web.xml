@@ -30,7 +30,7 @@
         </session-timeout>
     </session-config>
     <error-page>
-        <exception-type>404</exception-type>
+        <error-code>404</error-code>
         <location>/ErrorServlet</location>
     </error-page>
 </web-app>
