@@ -5,15 +5,20 @@
  */
 package beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
  *
  * @author gcoprea
  */
+@Entity
 public class Rol {
     
     private String nombre;
+    @Id @GeneratedValue
     private Long id;
     @ManyToOne
     private Usuario usuario;
@@ -22,9 +27,8 @@ public class Rol {
     }
 
     
-    public Rol(String nombre, Long id) {
+    public Rol(String nombre) {
         this.nombre = nombre;
-        this.id = id;
     }
 
     public String getNombre() {

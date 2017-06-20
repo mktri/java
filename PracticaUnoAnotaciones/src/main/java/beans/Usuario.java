@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
     private Long id;
     private String nombre;
     private String clave;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario" , fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rol> roles = new HashSet<>();
 
     public Usuario() {
@@ -60,6 +60,14 @@ public class Usuario implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+     public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 
     @Override

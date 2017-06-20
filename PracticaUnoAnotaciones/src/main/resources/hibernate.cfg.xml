@@ -35,6 +35,7 @@
         <property name="hbm2ddl.auto">update</property>
 <!-- Mapas clases-tablas -->        
         <mapping class="beans.Usuario"/>
+        <mapping class="beans.Rol"/>
         
     </session-factory>
 </hibernate-configuration>
